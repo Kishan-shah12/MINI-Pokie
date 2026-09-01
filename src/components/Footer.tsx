@@ -102,6 +102,14 @@ export const Footer: React.FC<FooterProps> = ({
               </li>
               <li>
                 <button
+                  onClick={() => onSelectApp("2048")}
+                  className="hover:text-indigo-600 dark:hover:text-indigo-400 transition"
+                >
+                  2048 Puzzle Arcade
+                </button>
+              </li>
+              <li>
+                <button
                   onClick={() => onSelectApp("snake")}
                   className="hover:text-indigo-600 dark:hover:text-indigo-400 transition"
                 >

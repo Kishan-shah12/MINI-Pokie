@@ -52,6 +52,12 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
             Markdown Editor
           </button>
           <button
+            onClick={() => onQuickLaunch("2048")}
+            className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 hover:text-indigo-600 dark:hover:text-indigo-400 text-slate-700 dark:text-slate-300 transition"
+          >
+            2048 Game
+          </button>
+          <button
             onClick={() => onQuickLaunch("snake")}
             className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-950/60 hover:text-indigo-600 dark:hover:text-indigo-400 text-slate-700 dark:text-slate-300 transition"
           >

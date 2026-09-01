@@ -2,6 +2,7 @@ import { PokieApp } from "./types";
 import { QRCodeApp } from "./apps/QRCodeApp";
 import { MarkdownEditorApp } from "./apps/MarkdownEditorApp";
 import { SnakeGameApp } from "./apps/SnakeGameApp";
+import { Game2048App } from "./apps/Game2048App";
 import { QuizMasterApp } from "./apps/QuizMasterApp";
 import { AIUtilitiesApp } from "./apps/AIUtilitiesApp";
 import { PaletteStudioApp } from "./apps/PaletteStudioApp";
@@ -18,6 +19,16 @@ export const APPS_REGISTRY: PokieApp[] = [
     tags: ["Utility", "SVG", "Export", "Offline"],
     badge: "Popular",
     component: QRCodeApp,
+  },
+  {
+    id: "2048",
+    title: "2048 Puzzle Arcade",
+    description: "The addictive tile merging puzzle. Slide numbers, combine matches, trigger chiptune sounds, and reach the 2048 tile!",
+    category: "games",
+    icon: "Grid",
+    tags: ["Puzzle", "Numbers", "Classic", "Brain Game"],
+    badge: "Hot",
+    component: Game2048App,
   },
   {
     id: "markdown",
