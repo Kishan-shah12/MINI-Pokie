@@ -1,0 +1,150 @@
+import React from "react";
+import {
+  Compass,
+  Search,
+  Moon,
+  Sun,
+  Wrench,
+  Gamepad2,
+  Sparkles,
+  Zap,
+  Github,
+  CheckCircle2,
+} from "lucide-react";
+import { AppCategory } from "../types";
+
+interface HeaderProps {
+  activeCategory: AppCategory | "all" | "favorites";
+  onSelectCategory: (cat: AppCategory | "all" | "favorites") => void;
+  searchQuery: string;
+  onSearchChange: (q: string) => void;
+  darkMode: boolean;
+  onToggleDarkMode: () => void;
+  onHomeClick: () => void;
+  favoritesCount: number;
+}
+
+export const Header: React.FC<HeaderProps> = ({
+  activeCategory,
+  onSelectCategory,
+  searchQuery,
+  onSearchChange,
+  darkMode,
+  onToggleDarkMode,
+  onHomeClick,
+  favoritesCount,
+}) => {
+  return (
+    <header className="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors shadow-2xs">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 gap-3 sm:gap-6">
+          {/* Brand Logo */}
+          <button
+            onClick={onHomeClick}
+            className="flex items-center space-x-3 text-left group focus:outline-none shrink-0"
+            id="brand-logo-btn"
+          >
+            <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-indigo-200/50 dark:shadow-none shadow-lg group-hover:scale-105 transition-transform">
+              <span className="text-white font-extrabold text-xl tracking-tight">M</span>
+            </div>
+            <div>
+              <h1 className="text-lg sm:text-xl font-extrabold tracking-tight text-slate-800 dark:text-white">
+                Mini<span className="text-indigo-600 dark:text-indigo-400"> Pokie</span>
+              </h1>
+            </div>
+          </button>
+
+          {/* Center Search Bar */}
+          <div className="flex-1 max-w-md mx-2 sm:mx-6">
+            <div className="relative">
+              <input
+                id="global-search-input"
+                type="text"
+                value={searchQuery}
+                onChange={(e) => onSearchChange(e.target.value)}
+                placeholder="Search tools & games..."
+                className="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-full py-2 pl-4 pr-9 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-indigo-500 transition-all outline-none"
+              />
+              <div className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+                <Search className="w-4 h-4" />
+              </div>
+              {searchQuery && (
+                <button
+                  onClick={() => onSearchChange("")}
+                  className="absolute right-9 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Right Action Icons & Badges */}
+          <div className="flex items-center space-x-4 sm:space-x-6 text-sm font-medium text-slate-500 dark:text-slate-400 shrink-0">
+            <button
+              onClick={onHomeClick}
+              className="hover:text-indigo-600 dark:hover:text-indigo-400 transition hidden md:block text-xs font-semibold"
+            >
+              Library
+            </button>
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-indigo-600 dark:hover:text-indigo-400 transition hidden lg:flex items-center gap-1 text-xs font-semibold"
+            >
+              <Github className="w-3.5 h-3.5" />
+              <span>Open Source</span>
+            </a>
+            
+            <div className="h-5 w-px bg-slate-200 dark:bg-slate-800 hidden sm:block"></div>
+            
+            <span className="hidden sm:inline-flex bg-emerald-100 text-emerald-700 dark:bg-emerald-950/80 dark:text-emerald-300 px-3 py-1 rounded-full text-xs font-bold">
+              No Signup Required
+            </span>
+
+            <button
+              id="theme-toggle-btn"
+              onClick={onToggleDarkMode}
+              className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            >
+              {darkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile / Responsive Category Navigation Strip */}
+        <div className="flex md:hidden items-center gap-2 py-2 overflow-x-auto no-scrollbar border-t border-slate-100 dark:border-slate-800/60">
+          {[
+            { id: "all", label: "All Items", icon: Compass },
+            { id: "tools", label: "Tools", icon: Wrench },
+            { id: "games", label: "Games", icon: Gamepad2 },
+            { id: "ai", label: "AI Utils", icon: Sparkles },
+            ...(favoritesCount > 0
+              ? [{ id: "favorites", label: `Saved (${favoritesCount})`, icon: Zap }]
+              : []),
+          ].map((tab) => {
+            const Icon = tab.icon;
+            const active = activeCategory === tab.id;
+            return (
+              <button
+                key={tab.id}
+                id={`cat-tab-mobile-${tab.id}`}
+                onClick={() => onSelectCategory(tab.id as any)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition ${
+                  active
+                    ? "bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 font-bold"
+                    : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                }`}
+              >
+                <Icon className="w-3.5 h-3.5" />
+                <span>{tab.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </header>
+  );
+};
