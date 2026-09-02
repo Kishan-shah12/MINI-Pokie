@@ -8,8 +8,7 @@ import {
   Gamepad2,
   Sparkles,
   Zap,
-  Github,
-  CheckCircle2,
+  Grid,
 } from "lucide-react";
 import { AppCategory } from "../types";
 
@@ -80,22 +79,16 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* Right Action Icons & Badges */}
-          <div className="flex items-center space-x-4 sm:space-x-6 text-sm font-medium text-slate-500 dark:text-slate-400 shrink-0">
+          <div className="flex items-center space-x-3 sm:space-x-4 text-sm font-medium text-slate-500 dark:text-slate-400 shrink-0">
             <button
+              id="nav-library-btn"
               onClick={onHomeClick}
-              className="hover:text-indigo-600 dark:hover:text-indigo-400 transition hidden md:block text-xs font-semibold"
+              className="px-3 py-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition flex items-center gap-1.5 text-xs font-bold"
+              title="View all apps in the Library"
             >
-              Library
+              <Grid className="w-3.5 h-3.5 text-indigo-500" />
+              <span>Library</span>
             </button>
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-indigo-600 dark:hover:text-indigo-400 transition hidden lg:flex items-center gap-1 text-xs font-semibold"
-            >
-              <Github className="w-3.5 h-3.5" />
-              <span>Open Source</span>
-            </a>
             
             <div className="h-5 w-px bg-slate-200 dark:bg-slate-800 hidden sm:block"></div>
             

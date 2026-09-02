@@ -89,6 +89,25 @@ export const App: React.FC = () => {
     window.history.pushState({}, "", url.toString());
   };
 
+  const handleOpenLibrary = () => {
+    setActiveAppId(null);
+    setActiveCategory("all");
+    setSearchQuery("");
+    const url = new URL(window.location.href);
+    url.searchParams.delete("app");
+    window.history.pushState({}, "", url.toString());
+    
+    // Smooth scroll to directory section
+    setTimeout(() => {
+      const dirEl = document.getElementById("directory-section");
+      if (dirEl) {
+        dirEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }, 50);
+  };
+
   const toggleFavorite = (appId: string, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
     setFavorites((prev) =>
@@ -138,7 +157,7 @@ export const App: React.FC = () => {
         }}
         darkMode={darkMode}
         onToggleDarkMode={() => setDarkMode(!darkMode)}
-        onHomeClick={handleBackToHub}
+        onHomeClick={handleOpenLibrary}
         favoritesCount={favorites.length}
       />
 
@@ -165,12 +184,15 @@ export const App: React.FC = () => {
             )}
 
             {/* Main Split Section: Sleek Sidebar Navigation + Apps Grid */}
-            <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-start">
+            <div id="directory-section" className="flex flex-col md:flex-row gap-6 md:gap-8 items-start scroll-mt-24">
               {/* Sleek Sidebar Category Navigation */}
               <aside className="w-full md:w-48 shrink-0 space-y-1.5 hidden md:block">
                 <button
                   id="side-cat-all"
-                  onClick={() => setActiveCategory("all")}
+                  onClick={() => {
+                    setActiveCategory("all");
+                    setSearchQuery("");
+                  }}
                   className={`w-full text-left px-4 py-2.5 rounded-xl font-medium text-sm transition-colors flex items-center gap-2.5 ${
                     activeCategory === "all"
                       ? "bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 font-bold"
@@ -285,19 +307,25 @@ export const App: React.FC = () => {
                       />
                     ))}
 
-                    {/* Submit a Tool Card (Matching Sleek Design) */}
+                    {/* Suggest a Tool Card (Matching Sleek Design) */}
                     <div
-                      onClick={() => window.open("https://github.com", "_blank")}
+                      id="suggest-tool-card"
+                      onClick={() => {
+                        const title = prompt("What tool, mini game, or utility would you like to see next in Mini Pokie?");
+                        if (title && title.trim()) {
+                          alert(`Thank you for your suggestion: "${title.trim()}"! We're adding new modular utilities regularly.`);
+                        }
+                      }}
                       className="bg-slate-100/70 dark:bg-slate-900/50 p-5 rounded-2xl border border-dashed border-slate-300 dark:border-slate-800 flex flex-col items-center justify-center text-center group cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors min-h-[160px]"
                     >
                       <div className="w-10 h-10 border-2 border-slate-400 dark:border-slate-600 border-dashed rounded-full flex items-center justify-center text-slate-400 dark:text-slate-500 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 group-hover:border-indigo-500 transition-colors">
                         <Plus className="w-5 h-5" />
                       </div>
                       <p className="mt-3 text-xs font-bold text-slate-600 dark:text-slate-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                        Submit a Tool
+                        Suggest a Tool
                       </p>
                       <span className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">
-                        Open source module request
+                        Request new mini app
                       </span>
                     </div>
                   </div>

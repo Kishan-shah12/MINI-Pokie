@@ -31,7 +31,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({
           One place for every small thing.
         </h2>
         <p className="text-slate-500 dark:text-slate-400 text-base sm:text-lg max-w-2xl leading-relaxed mb-6">
-          Free browser-based tools, tiny games, and AI utilities. No paywalls, no tracking, just utility. Modular and open source.
+          Free browser-based tools, tiny games, and AI utilities. No paywalls, no tracking, just fast, clean utility.
         </p>
 
         {/* Quick Launch Pills */}

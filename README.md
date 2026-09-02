@@ -1,99 +1,233 @@
 # Mini Pokie 🎮 🛠️ ⚡
-> A modern, browser-first open playground for free tools, small games, and simple AI utilities. 100% Free • No Signup • No Paywall • Fast & Modular.
+> **The Modern, High-Performance Browser Playground & Web Utilities Suite**  
+> *Instant Access • Zero Authentication Friction • Private & Client-First • Production-Grade Server-Side Gemini AI*
 
 ---
 
-## 🌟 Overview & Features
+<div align="center">
 
-Mini Pokie is designed to be the ultimate single-destination browser hub where anyone can instantly access productive developer/design utilities, play lightweight casual games, and leverage server-side Gemini AI models without registration barriers, subscription paywalls, or privacy-invasive tracking.
+![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue?style=for-the-badge&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-5.4-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Gemini AI](https://img.shields.io/badge/Google_Gemini-3.7_Flash-8E75B2?style=for-the-badge&logo=google&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-Ready-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![Cloud Run](https://img.shields.io/badge/Google_Cloud_Run-Ready-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white)
 
-### 🧩 Included Modular Applications
-
-1. **QR Code Generator (`qrcode`)**:
-   - Customizable content (URLs, Wi-Fi keys, vCards, plain text, emails).
-   - Real-time custom foreground/background colors, error correction levels (L/M/Q/H), margin adjustments.
-   - 1-click PNG & vector SVG downloads and quick copy.
-
-2. **Markdown Studio (`markdown`)**:
-   - Real-time split-screen editing with synchronized live preview.
-   - Built-in starter templates (Project README, Technical Spec, Blog Post, Cheat Sheet).
-   - Word count, character count, reading time estimates, and `.md` file export.
-
-3. **Retro Snake Arcade (`snake`)**:
-   - Classic 60 FPS grid-based gameplay with arrow key and touch D-Pad controls.
-   - Pure Web Audio API synthesized sound effects (no external audio assets).
-   - Golden Apples, speed multipliers, and persistent local high scores.
-
-4. **Quiz Master & Trivia Arena (`quiz`)**:
-   - Multiple preset question decks (Web Tech, Science & Nature, World History).
-   - **Custom AI Quiz Generator**: Prompts server-side Gemini to construct customized 5-question trivia tests for ANY topic.
-   - Round timer, score calculation, streak multipliers, answer explanations, and celebration confetti.
-
-5. **AI Mini Utilities Hub (`ai-tools`)**:
-   - **Text Polisher & TL;DR**: Summarize, bulletize, formalize, casualize, grammar fixes, or expand.
-   - **Code & Regex Explainer**: Detailed step-by-step breakdown of JavaScript, Python, Regex, SQL, and complexity analysis.
-   - **System Prompt Refiner**: Converts raw concepts into structured, high-yield system instructions.
-   - **Resilient Fallback Ladder**: Automated 4-tier model failover (`gemini-3.6-flash` ➔ `gemini-3.1-flash-lite` ➔ `gemini-flash-latest` ➔ `gemini-3.7-flash`).
-
-6. **Palette Studio & Contrast Lab (`palette`)**:
-   - Spacebar color harmony shuffling with individual hex lock toggles.
-   - Full WCAG 2.1 Contrast Checker (AA, AAA, Large Text standards).
-   - Direct CSS variable export.
-
-7. **Secure Password & Passphrase Generator (`password`)**:
-   - 100% Client-side Web Crypto API (`crypto.getRandomValues`).
-   - Customizable character pools, length slider, and memorable passphrase generation.
-   - Live entropy calculation and crack-time strength meter.
-
-8. **Universal Unit & Storage Converter (`converter`)**:
-   - Instant conversion across Length, Weight, Temperature, Digital Storage (Bytes/GB/TB), Speed, Time, and Area.
-   - 1-click unit swap and high-precision outputs.
+</div>
 
 ---
 
-## 🔒 Security Architecture & Threat Model
+## 🌟 Table of Contents
 
-Mini Pokie implements defense-in-depth across the 5 threat zones:
+- [Overview](#-overview)
+- [System Architecture](#-system-architecture)
+- [Application & Mini-Tool Catalog](#-application--mini-tool-catalog)
+- [AI Capabilities & Fallback Protocol](#-ai-capabilities--fallback-protocol)
+- [Threat Modeling & Security Posture](#-threat-modeling--security-posture)
+- [API Reference](#-api-reference)
+- [Deployment: Vercel (Serverless)](#-deploying-to-vercel)
+- [Deployment: Google Cloud Run (Containerized)](#-deploying-to-google-cloud-run)
+- [Local Development Guide](#-local-development-guide)
+- [Extensibility: Adding New Modules](#-extensibility-adding-new-modules)
 
-| Threat Zone | Identified Risks | Implemented Countermeasures |
+---
+
+## 📖 Overview
+
+**Mini Pokie** is an open, client-first web suite that brings together daily utilities, retro arcade games, and server-proxied AI intelligence under a unified, ultra-responsive single-page interface. 
+
+### Core Highlights:
+- ⚡ **Instant Execution**: All core games and productivity tools run client-side with sub-millisecond response latency.
+- 🛡️ **Zero Tracking & Privacy Respect**: No third-party ad telemetry, cookies, or user tracking.
+- 🎨 **Adaptive Theme Engine**: Class-based dark and light modes with automated system preference detection.
+- 🤖 **Resilient Server-Side AI**: Gemini models run behind a secure Express/Vercel serverless layer with 4-stage automated failover.
+- 📱 **Fully Responsive**: Native desktop layout transitions seamlessly to touch-optimized mobile viewports.
+
+---
+
+## 🏗️ System Architecture
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                             MINI POKIE CLIENT                               │
+│  React 18 + Vite SPA • Tailwind CSS v4 • Lucide Icons • Web Audio Synthesizer│
+└──────────────────────────────────────┬──────────────────────────────────────┘
+                                       │
+                    ┌──────────────────┴──────────────────┐
+                    ▼                                     ▼
+        ┌───────────────────────┐             ┌───────────────────────┐
+        │  Local Client Tools   │             │   AI Network Gateway  │
+        │  • Snake (Canvas 60fps)│            │   (HTTP JSON Requests)│
+        │  • 2048 Matrix Engine │             └───────────┬───────────┘
+        │  • QR Code Vectorizer │                         │
+        │  • Markdown Live View │                         ▼
+        │  • Palette Lab / WCAG │             ┌───────────────────────┐
+        │  • Web Crypto Passgen │             │  /api/* Proxy Server  │
+        │  • Unit Convert Engine│             │  • Express / Vite Dev │
+        └───────────────────────┘             │  • Vercel Serverless  │
+                                              │  • Cloud Run Engine   │
+                                              └───────────┬───────────┘
+                                                          │
+                                                          ▼
+                                              ┌───────────────────────┐
+                                              │  Google Gemini Engine │
+                                              │  • gemini-3.6-flash   │
+                                              │  • gemini-3.1-lite    │
+                                              │  • gemini-flash-latest│
+                                              │  • gemini-3.7-flash   │
+                                              └───────────────────────┘
+```
+
+---
+
+## 🧩 Application & Mini-Tool Catalog
+
+| App Identifier | Title | Category | Technical Specifications & Key Features |
+| :--- | :--- | :--- | :--- |
+| `2048` | **2048 Puzzle Arcade** | `games` | 4x4 slide matrix, move history undo stack, Web Audio chime synthesis, high score persistence. |
+| `snake` | **Retro Snake Arcade** | `games` | 60 FPS HTML5 canvas, Golden Apple bonuses, speed scaling, touch D-Pad controls. |
+| `quiz` | **Quiz Master & Trivia Arena** | `games` | Multi-category trivia decks, AI dynamic quiz generator, streak multipliers, sound FX. |
+| `qrcode` | **QR Code Studio** | `tools` | Real-time vector generator, error correction toggles, foreground/background color picker, PNG/SVG exports. |
+| `markdown` | **Markdown Studio** | `tools` | Split-pane live editor, starter templates, word/char counters, HTML preview sanitized via `rehype-sanitize`. |
+| `palette` | **Palette Studio & Contrast Lab** | `tools` | Spacebar color harmony generator, hex locks, WCAG 2.1 AA/AAA compliance checker, CSS export. |
+| `password` | **Password & Passphrase Lab** | `tools` | Web Crypto API (`crypto.getRandomValues`), entropy measurement, dictionary passphrase generator. |
+| `converter` | **Universal Unit Converter** | `tools` | High-precision converter for Length, Weight, Temperature, Digital Bytes, Speed, Time, and Area. |
+| `ai-tools` | **AI Utilities Hub** | `ai` | Text Polisher (summarize, grammar, formalize), Code/Regex Explainer, System Prompt Refiner. |
+
+---
+
+## 🤖 AI Capabilities & Fallback Protocol
+
+All AI transformations are executed server-side via the `@google/genai` SDK to maintain secret hygiene and ensure high availability.
+
+### Automated Model Fallback Ladder
+
+To prevent downtime from region quotas or temporary service disruptions, requests pass through a sequential fallback pipeline:
+
+```text
+Primary: gemini-3.6-flash
+   │
+   ▼ (on 429, 503, or 500 status)
+Fallback 1: gemini-3.1-flash-lite
+   │
+   ▼
+Fallback 2: gemini-flash-latest
+   │
+   ▼
+Deep Reasoning Fallback: gemini-3.7-flash
+```
+
+---
+
+## 🔒 Threat Modeling & Security Posture
+
+| Threat Zone | Identified Vectors | Implemented Security Safeguards |
 | :--- | :--- | :--- |
-| **Input Surfaces** | Malicious prompt injection, oversized payload flooding, XSS through markdown rendering. | Server-side defensive schema checks, input length limits, HTML sanitization via `rehype-sanitize`, null-safe body destructuring. |
-| **Planning & Reasoning** | Prompt hijacking targeting system directives in AI endpoints. | Hardcoded strict delimiter encapsulation and defensive system prompt engineering in backend routes. |
-| **Tool Execution & APIs** | SSRF or unauthorized external API invocation. | Server proxies all Gemini API requests strictly server-side; `GEMINI_API_KEY` is never exposed to the client. |
-| **Memory & State** | Data persistence leaks, cross-user collisions. | Pure client-side local storage (`localStorage`) for user preferences; zero sensitive tokens stored. |
-| **Inter-System Comms** | API key leaks in client bundles or network logs. | Complete server-side proxy architecture (`/api/ai/*`) using `@google/genai` TypeScript SDK with lazy initialization. |
+| **Input Surfaces** | Prompt injection, malicious Markdown XSS, large payload DOS. | Express JSON body parsers with 10MB bounds, `rehype-sanitize` for rendered HTML, defensive schema guards. |
+| **Planning & Reasoning** | Prompt escape attacking system instructions. | Explicit delimiter encapsulation (`"""`) and fixed system prompts in backend routes. |
+| **Tool Execution** | Arbitrary code execution or SSRF. | No dynamic code evaluation (`eval`); strict API proxies with whitelisted parameter types. |
+| **Memory & State** | Cross-tenant data leakage or corrupted local state. | Pure client-side `localStorage` isolation; zero server-side credential persistence. |
+| **Inter-System Comms** | Browser API key leakage. | Zero client-side API keys. `GEMINI_API_KEY` is strictly accessed within serverless/container backend environments. |
 
 ---
 
-## 🚀 Local Development Setup
+## 🔌 API Reference
 
-### Prerequisites
-- Node.js (v18.0.0 or higher)
-- npm or yarn
+### 1. Text Transformation & Polish
+- **Endpoint**: `POST /api/ai/text-polish`
+- **Request Payload**:
+  ```json
+  {
+    "text": "The quick brown fox jumps over the lazy dog.",
+    "mode": "summarize" 
+  }
+  ```
+  *(Supported modes: `summarize`, `bulletize`, `formal`, `casual`, `fix-grammar`, `expand`)*
+- **Response**:
+  ```json
+  {
+    "result": "Transformed text output here...",
+    "modelUsed": "gemini-3.6-flash"
+  }
+  ```
 
-### Steps
-1. Clone repository and install dependencies:
-   ```bash
-   npm install
-   ```
+### 2. Code & Regex Explainer
+- **Endpoint**: `POST /api/ai/code-explain`
+- **Request Payload**:
+  ```json
+  {
+    "code": "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$",
+    "language": "regex"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "result": "### Overview\nMatches passwords with minimum 8 characters...",
+    "modelUsed": "gemini-3.6-flash"
+  }
+  ```
 
-2. Configure environment variables in `.env`:
-   ```bash
-   cp .env.example .env
-   # Edit .env and add your Gemini API key (optional for local testing):
-   # GEMINI_API_KEY="your-api-key-here"
-   ```
+### 3. Prompt Refiner
+- **Endpoint**: `POST /api/ai/prompt-refine`
+- **Request Payload**:
+  ```json
+  {
+    "prompt": "write a python script to parse csv",
+    "targetModel": "Gemini 3.7 Flash"
+  }
+  ```
 
-3. Start the unified development server (Express + Vite on Port 3000):
-   ```bash
-   npm run dev
-   ```
-
-4. Open your browser at `http://localhost:3000`.
+### 4. Dynamic AI Quiz Generator
+- **Endpoint**: `POST /api/ai/quiz-generator`
+- **Request Payload**:
+  ```json
+  {
+    "topic": "Quantum Computing",
+    "difficulty": "Medium",
+    "count": 5
+  }
+  ```
 
 ---
 
-## ☁️ Google Cloud Run Deployment & Campaign Verification
+## ▲ Deploying to Vercel
+
+Mini Pokie includes out-of-the-box configuration for [Vercel](https://vercel.com) using Vercel Serverless Functions (`/api`) and Vite static hosting.
+
+### Method 1: Deploy via Vercel Dashboard (Recommended)
+
+1. Push your repository to GitHub, GitLab, or Bitbucket.
+2. Go to **[vercel.com/new](https://vercel.com/new)** and import your repository.
+3. Configure your project:
+   - **Framework Preset**: `Vite`
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+4. In **Environment Variables**, add:
+   - **Name**: `GEMINI_API_KEY`
+   - **Value**: Your Google Gemini API Key ([Get one at Google AI Studio](https://aistudio.google.com/app/apikey))
+5. Click **Deploy**. Your application will be live in seconds!
+
+### Method 2: Deploy via Vercel CLI
+
+```bash
+# 1. Install CLI
+npm install -g vercel
+
+# 2. Preview Deployment
+vercel
+
+# 3. Add Production Secret
+vercel env add GEMINI_API_KEY production
+
+# 4. Deploy to Production
+vercel --prod
+```
+
+---
+
+## ☁️ Deploying to Google Cloud Run
 
 ### 1. Prerequisites & GCP Configuration
 Ensure the Google Cloud SDK (`gcloud`) is installed and authenticated:
@@ -110,9 +244,9 @@ Store your `GEMINI_API_KEY` in Google Cloud Secret Manager:
 ```bash
 # Create and populate the secret
 gcloud secrets create GEMINI_API_KEY --replication-policy="automatic"
-echo -n "YOUR_GEMINI_API_KEY" | gcloud secrets versions add GEMINI_API_KEY --data-file=-
+echo -n "YOUR_API_KEY" | gcloud secrets versions add GEMINI_API_KEY --data-file=-
 
-# Grant Cloud Run default service account permission to read the secret
+# Grant the default Cloud Run service account access to read the secret
 PROJECT_NUMBER=$(gcloud projects describe YOUR_PROJECT_ID --format="value(projectNumber)")
 gcloud secrets add-iam-policy-binding GEMINI_API_KEY \
   --member="serviceAccount:${PROJECT_NUMBER}-compute@developer.gserviceaccount.com" \
@@ -120,25 +254,20 @@ gcloud secrets add-iam-policy-binding GEMINI_API_KEY \
 ```
 
 ### 3. Firestore Security Rules (User Data Isolation)
-If enabling persistent multi-user interaction logging, deploy the following secure rule set (`firestore.rules`):
+If enabling persistent user interaction logging, deploy the following secure rules (`firestore.rules`):
 ```javascript
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // User-bound document isolation
     match /users/{userId}/interactions/{interactionId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
-    }
-    // Block all unauthenticated root reads/writes
-    match /{document=**} {
-      allow read, write: if false;
     }
   }
 }
 ```
 
 ### 4. Cloud Run Deployment Command
-Build and deploy the containerized full-stack application directly:
+Deploy the unified container directly using Google Cloud Run:
 ```bash
 gcloud run deploy mini-pokie \
   --source . \
@@ -159,26 +288,43 @@ gcloud run services update mini-pokie \
 
 ---
 
-## 🧩 Adding New Modular Apps
+## 💻 Local Development Guide
 
-Mini Pokie is architected for zero-friction extensibility. To add a new tool or game:
+```bash
+# 1. Clone & Install
+git clone https://github.com/your-username/mini-pokie.git
+cd mini-pokie
+npm install
 
-1. Create your component in `src/apps/MyNewApp.tsx`.
-2. Register it in `src/registry.ts`:
-   ```typescript
-   {
-     id: "my-new-app",
-     title: "My New Tool",
-     description: "What it does...",
-     category: "tools", // "tools" | "games" | "ai"
-     icon: "Wrench",    // Lucide icon name
-     tags: ["New", "Utility"],
-     component: MyNewApp,
-   }
-   ```
-3. That's it! It automatically appears on the homepage, category filters, search engine, and deep-link routing.
+# 2. Configure Environment
+cp .env.example .env
+# Open .env and set your GEMINI_API_KEY="AIza..."
+
+# 3. Start Unified Server
+npm run dev
+
+# 4. Open in Browser
+# http://localhost:3000
+```
 
 ---
 
-## 📄 License
-Open source under the [MIT License](LICENSE).
+## 🛠️ Extensibility: Adding New Modules
+
+Mini Pokie is architected for frictionless modularity. To add a new mini app:
+
+1. **Create the App Component**: Add `src/apps/MyNewApp.tsx`.
+2. **Register the App**: In `src/registry.ts`, add:
+   ```typescript
+   {
+     id: "my-app",
+     title: "My New Application",
+     description: "What makes this tool great...",
+     category: "tools", // "tools" | "games" | "ai"
+     icon: "Sparkles",   // Any Lucide icon
+     tags: ["Productivity", "Fast"],
+     badge: "New",
+     component: MyNewApp,
+   }
+   ```
+3. The catalog, search engine, sidebar, and URL deep linking automatically incorporate your new module!

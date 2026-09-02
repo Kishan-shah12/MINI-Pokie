@@ -1,5 +1,5 @@
 import React from "react";
-import { Zap, ShieldCheck, Github } from "lucide-react";
+import { Zap, ShieldCheck } from "lucide-react";
 
 interface FooterProps {
   onSelectCategory: (cat: any) => void;
@@ -26,7 +26,7 @@ export const Footer: React.FC<FooterProps> = ({
               </span>
             </div>
             <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm leading-relaxed">
-              Free browser-based tools, tiny games, and AI utilities. No paywalls, no tracking, just utility. Modular and open source.
+              Free browser-based tools, tiny games, and AI utilities. No paywalls, no tracking, just fast, clean utility.
             </p>
             <div className="flex items-center gap-3 pt-1 text-xs text-slate-500 dark:text-slate-400 font-medium">
               <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
@@ -135,17 +135,7 @@ export const Footer: React.FC<FooterProps> = ({
           <div className="flex items-center space-x-4 text-[11px] text-slate-400 font-medium uppercase tracking-wider">
             <span>&copy; {new Date().getFullYear()} Mini Pokie</span>
             <span className="h-3 w-px bg-slate-200 dark:bg-slate-700"></span>
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-slate-600 dark:hover:text-slate-300 transition flex items-center gap-1"
-            >
-              <Github className="w-3 h-3" />
-              <span>Github</span>
-            </a>
-            <span className="h-3 w-px bg-slate-200 dark:bg-slate-700"></span>
-            <span>MIT License</span>
+            <span>All-In-One Web Hub</span>
           </div>
 
           <div className="flex items-center space-x-2">
