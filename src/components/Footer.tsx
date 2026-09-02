@@ -1,14 +1,16 @@
 import React from "react";
-import { Zap, ShieldCheck } from "lucide-react";
+import { Zap, ShieldCheck, Lightbulb } from "lucide-react";
 
 interface FooterProps {
   onSelectCategory: (cat: any) => void;
   onSelectApp: (appId: string) => void;
+  onOpenSuggest?: () => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   onSelectCategory,
   onSelectApp,
+  onOpenSuggest,
 }) => {
   return (
     <footer className="mt-16 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors">
@@ -75,8 +77,21 @@ export const Footer: React.FC<FooterProps> = ({
                   ⭐ All Items
                 </button>
               </li>
+              {onOpenSuggest && (
+                <li className="pt-1">
+                  <button
+                    id="footer-suggest-btn"
+                    onClick={onOpenSuggest}
+                    className="text-indigo-600 dark:text-indigo-400 font-bold hover:underline flex items-center gap-1"
+                  >
+                    <Lightbulb className="w-3.5 h-3.5" />
+                    <span>Suggest a Tool / Wishlist</span>
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
+
 
           {/* Featured Apps */}
           <div className="space-y-2">

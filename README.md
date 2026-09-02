@@ -85,6 +85,16 @@
 
 | App Identifier | Title | Category | Technical Specifications & Key Features |
 | :--- | :--- | :--- | :--- |
+| `json-formatter` | **JSON Formatter & Validator** | `tools` | Format, beautify, minify, repair single-quote/unquoted keys, inspect schemas, and explore collapsible interactive tree structures. |
+| `sudoku` | **Sudoku Logic Master** | `games` | 9x9 Sudoku with Easy to Expert difficulties, pencil notes mode, conflict highlighter, smart hints, undo history, and sound effects. |
+| `regex-tester` | **Regex Playground & Tester** | `tools` | Live regex evaluator with real-time match highlight overlays, capture group inspector, flags toggle, substitution preview, and cheat sheets. |
+| `flappy-bird` | **Flappy Bird Arcade 60FPS** | `games` | 60 FPS physics arcade flapper with retro pipes, coin pickups, Bronze/Silver/Gold/Platinum medals, and high score records. |
+| `hash-encoder` | **Base64 & Crypto Hash Suite** | `tools` | Base64 text/file encoder, SHA-256 / SHA-512 / MD5 hashes via Web Crypto API, URL percent codec, Hex/Binary, and ROT13 cipher. |
+| `audio-recorder` | **Audio Voice Recorder & Visualizer** | `tools` | In-browser microphone recorder with real-time frequency equalizer & oscilloscope waveforms, playback player, and WebM download. |
+| `subway-surfers` | **Subway 3D Runner** | `games` | 60 FPS 3-lane 3D perspective runner with trains, hurdle jumps, barrier slides, coin magnets, hoverboard shields, and sound FX. |
+| `hill-climb` | **Hill Climb Offroad** | `games` | 2D physics mountain vehicle racing with multi-octave terrain, suspension simulation, fuel pickups, stunt flips, and garage upgrades. |
+| `candy-crush` | **Candy Match Crush** | `games` | 8x8 match-3 puzzle arcade with cascading gravity drops, striped candies, color bombs, combo multipliers, and stage progression. |
+| `tictactoe` | **Tic Tac Toe Pro** | `games` | Strategic 3x3 and 5x5 grids with Unbeatable Minimax AI, 2-Player Pass & Play, Cyberpunk/Neon themes, and audio FX. |
 | `2048` | **2048 Puzzle Arcade** | `games` | 4x4 slide matrix, move history undo stack, Web Audio chime synthesis, high score persistence. |
 | `brick-breaker` | **Brick Breaker Retro Arcade** | `games` | 60 FPS classic breakout with multi-hit bricks, explosive bombs, lasers, fireball power-ups, and 3 level stages. |
 | `wordle` | **Wordle Guess Arcade** | `games` | 5-letter hidden word guessing in 6 tries, virtual keyboard, color status hints, dictionary validation, and streak tracker. |

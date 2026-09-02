@@ -9,6 +9,7 @@ import {
   Sparkles,
   Zap,
   Grid,
+  Lightbulb,
 } from "lucide-react";
 import { AppCategory } from "../types";
 
@@ -20,6 +21,7 @@ interface HeaderProps {
   darkMode: boolean;
   onToggleDarkMode: () => void;
   onHomeClick: () => void;
+  onOpenSuggest?: () => void;
   favoritesCount: number;
 }
 
@@ -31,6 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
   darkMode,
   onToggleDarkMode,
   onHomeClick,
+  onOpenSuggest,
   favoritesCount,
 }) => {
   return (
@@ -79,7 +82,19 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* Right Action Icons & Badges */}
-          <div className="flex items-center space-x-3 sm:space-x-4 text-sm font-medium text-slate-500 dark:text-slate-400 shrink-0">
+          <div className="flex items-center space-x-2 sm:space-x-3 text-sm font-medium text-slate-500 dark:text-slate-400 shrink-0">
+            {onOpenSuggest && (
+              <button
+                id="header-suggest-btn"
+                onClick={onOpenSuggest}
+                className="px-3 py-1.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-900/60 transition flex items-center gap-1.5 text-xs font-bold border border-amber-200/60 dark:border-amber-800/60"
+                title="Suggest a new tool or mini game"
+              >
+                <Lightbulb className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                <span className="hidden sm:inline">Suggest App</span>
+              </button>
+            )}
+
             <button
               id="nav-library-btn"
               onClick={onHomeClick}
@@ -87,15 +102,11 @@ export const Header: React.FC<HeaderProps> = ({
               title="View all apps in the Library"
             >
               <Grid className="w-3.5 h-3.5 text-indigo-500" />
-              <span>Library</span>
+              <span className="hidden sm:inline">Library</span>
             </button>
             
             <div className="h-5 w-px bg-slate-200 dark:bg-slate-800 hidden sm:block"></div>
             
-            <span className="hidden sm:inline-flex bg-emerald-100 text-emerald-700 dark:bg-emerald-950/80 dark:text-emerald-300 px-3 py-1 rounded-full text-xs font-bold">
-              No Signup Required
-            </span>
-
             <button
               id="theme-toggle-btn"
               onClick={onToggleDarkMode}
@@ -111,6 +122,7 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
           </div>
         </div>
+
 
         {/* Mobile / Responsive Category Navigation Strip */}
         <div className="flex md:hidden items-center gap-2 py-2 overflow-x-auto no-scrollbar border-t border-slate-100 dark:border-slate-800/60">

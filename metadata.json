@@ -1,6 +1,8 @@
 {
   "name": "Mini Pokie",
   "description": "A fast, open-source friendly hub for free browser tools, casual mini-games, and simple AI utilities with zero signups and zero paywalls.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

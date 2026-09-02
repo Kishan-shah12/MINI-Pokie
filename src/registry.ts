@@ -13,8 +13,118 @@ import { WordGuessApp } from "./apps/WordGuessApp";
 import { MemoryMatchApp } from "./apps/MemoryMatchApp";
 import { TypingSprintApp } from "./apps/TypingSprintApp";
 import { BrickBreakerApp } from "./apps/BrickBreakerApp";
+import { TicTacToeApp } from "./apps/TicTacToeApp";
+import { CandyCrushApp } from "./apps/CandyCrushApp";
+import { SubwaySurfersApp } from "./apps/SubwaySurfersApp";
+import { HillClimbApp } from "./apps/HillClimbApp";
+import { JsonFormatterApp } from "./apps/JsonFormatterApp";
+import { SudokuApp } from "./apps/SudokuApp";
+import { RegexTesterApp } from "./apps/RegexTesterApp";
+import { FlappyBirdApp } from "./apps/FlappyBirdApp";
+import { HashEncoderApp } from "./apps/HashEncoderApp";
+import { AudioRecorderApp } from "./apps/AudioRecorderApp";
 
 export const APPS_REGISTRY: PokieApp[] = [
+  {
+    id: "json-formatter",
+    title: "JSON Formatter & Validator",
+    description: "Format, minify, repair, and inspect JSON payloads with real-time error pointer detection, schema depth stats, and collapsible interactive tree visualization.",
+    category: "tools",
+    icon: "FileJson",
+    tags: ["JSON", "Developer", "Formatter", "Validator", "Syntax"],
+    badge: "Dev Tools",
+    component: JsonFormatterApp,
+  },
+  {
+    id: "sudoku",
+    title: "Sudoku Logic Master",
+    description: "Classic 9x9 Sudoku puzzle with Easy to Expert difficulties, pencil notes mode, conflict highlighter, smart hints, undo history, and sound effects.",
+    category: "games",
+    icon: "BrainCircuit",
+    tags: ["Sudoku", "Puzzle", "Logic", "Brain Game", "Numbers"],
+    badge: "Logic",
+    component: SudokuApp,
+  },
+  {
+    id: "regex-tester",
+    title: "Regex Playground & Tester",
+    description: "Live regular expression evaluator with interactive match overlays, capture group inspector, flags toggle, replacement previews, and preset library.",
+    category: "tools",
+    icon: "Terminal",
+    tags: ["Regex", "Developer", "Testing", "Expressions", "Substitution"],
+    badge: "Dev Tools",
+    component: RegexTesterApp,
+  },
+  {
+    id: "flappy-bird",
+    title: "Flappy Bird Arcade 60FPS",
+    description: "Smooth 60 FPS physics arcade flapper with retro pipe navigation, golden coin pickups, Bronze/Silver/Gold medals, and high score records.",
+    category: "games",
+    icon: "Award",
+    tags: ["Retro", "Arcade", "Flappy", "Physics", "Endless"],
+    badge: "Arcade",
+    component: FlappyBirdApp,
+  },
+  {
+    id: "hash-encoder",
+    title: "Base64 & Crypto Hash Suite",
+    description: "Comprehensive encryption & encoding suite: Base64 encode/decode, SHA-256 / SHA-512 / MD5 hashes, URL percent codec, Hex/Binary, and ROT13 cipher.",
+    category: "tools",
+    icon: "KeyRound",
+    tags: ["Security", "Encoding", "Base64", "Hash", "Crypto", "SHA256"],
+    badge: "Crypto",
+    component: HashEncoderApp,
+  },
+  {
+    id: "audio-recorder",
+    title: "Audio Voice Recorder & Visualizer",
+    description: "In-browser microphone voice recorder with real-time frequency equalizer & oscilloscope waveform visualizers, playback management, and WebM download.",
+    category: "tools",
+    icon: "Radio",
+    tags: ["Audio", "Microphone", "Waveform", "Recording", "Voice"],
+    badge: "Audio",
+    component: AudioRecorderApp,
+  },
+  {
+    id: "subway-surfers",
+    title: "Subway 3D Runner",
+    description: "60 FPS 3-lane 3D perspective subway runner. Dodge oncoming trains, jump over hurdles, slide under barriers, and collect powerups!",
+    category: "games",
+    icon: "Flame",
+    tags: ["3D Runner", "Endless", "Arcade", "High Speed", "Subway"],
+    badge: "Hot",
+    component: SubwaySurfersApp,
+  },
+  {
+    id: "hill-climb",
+    title: "Hill Climb Offroad",
+    description: "2D physics mountain vehicle racing. Throttle through rolling hills, manage fuel canisters, perform stunt backflips, and upgrade your Jeep!",
+    category: "games",
+    icon: "Gauge",
+    tags: ["Physics", "Driving", "Offroad", "Upgrades", "Racing"],
+    badge: "Physics",
+    component: HillClimbApp,
+  },
+  {
+    id: "candy-crush",
+    title: "Candy Match Crush",
+    description: "Juicy match-3 arcade puzzle with cascading gravity drops, combo multipliers, striped & explosive special candies, and stage targets.",
+    category: "games",
+    icon: "Sparkles",
+    tags: ["Match 3", "Puzzle", "Candies", "Cascades", "Combos"],
+    badge: "Popular",
+    component: CandyCrushApp,
+  },
+  {
+    id: "tictactoe",
+    title: "Tic Tac Toe Pro",
+    description: "Classic 3x3 and 5x5 grid strategy with Unbeatable Minimax AI, 2-Player Pass & Play, Cyberpunk/Neon themes, and audio FX.",
+    category: "games",
+    icon: "Grid3X3",
+    tags: ["Classic", "AI Minimax", "2-Player", "Strategy", "Themes"],
+    badge: "Classic",
+    component: TicTacToeApp,
+  },
   {
     id: "qrcode",
     title: "QR Code Generator",

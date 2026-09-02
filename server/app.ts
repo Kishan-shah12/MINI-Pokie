@@ -275,4 +275,33 @@ Output strictly valid JSON adhering to this structure:
   }
 });
 
+// AI App Idea & Feature Spec Enhancer
+app.post("/api/ai/suggest-spec", async (req: Request, res: Response) => {
+  try {
+    const data = req.body && typeof req.body === "object" ? req.body : {};
+    const title = typeof data.title === "string" ? data.title.trim() : "";
+    const category = typeof data.category === "string" ? data.category : "tools";
+    const description = typeof data.description === "string" ? data.description.trim() : "";
+
+    if (!title) {
+      return res.status(400).json({ error: "App title is required" });
+    }
+
+    const systemInstruction = `You are an expert product designer and frontend web engineer for Mini Pokie (a zero-signup browser mini-app suite).
+Given a user's proposed tool/game idea, generate a concise, high-yield recommendation list of 3-4 key features, UX controls, and client-side implementation ideas.
+Format as brief bullet points. Keep it under 100 words.`;
+
+    const prompt = `Proposed App: "${title}"\nCategory: ${category}\nUser Description: "${description}"`;
+
+    const result = await generateContentWithFallback(prompt, systemInstruction);
+    return res.json({ spec: result.text, modelUsed: result.modelUsed });
+  } catch (error: any) {
+    console.error("Error in /api/ai/suggest-spec:", error);
+    return res.status(500).json({
+      error: error?.message || "Failed to brainstorm app suggestions.",
+    });
+  }
+});
+
 export default app;
+

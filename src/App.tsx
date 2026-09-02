@@ -6,6 +6,7 @@ import { AppCard } from "./components/AppCard";
 import { LandingHero } from "./components/LandingHero";
 import { AppViewContainer } from "./components/AppViewContainer";
 import { Footer } from "./components/Footer";
+import { SuggestToolModal } from "./components/SuggestToolModal";
 import {
   Wrench,
   Gamepad2,
@@ -15,6 +16,7 @@ import {
   Plus,
   Compass,
   Star,
+  Lightbulb,
 } from "lucide-react";
 
 export const App: React.FC = () => {
@@ -27,6 +29,7 @@ export const App: React.FC = () => {
 
   const [activeCategory, setActiveCategory] = useState<AppCategory | "all" | "favorites">("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const [isSuggestModalOpen, setIsSuggestModalOpen] = useState(false);
 
   // Dark Mode State
   const [darkMode, setDarkMode] = useState<boolean>(() => {
@@ -158,6 +161,7 @@ export const App: React.FC = () => {
         darkMode={darkMode}
         onToggleDarkMode={() => setDarkMode(!darkMode)}
         onHomeClick={handleOpenLibrary}
+        onOpenSuggest={() => setIsSuggestModalOpen(true)}
         favoritesCount={favorites.length}
       />
 
@@ -310,12 +314,7 @@ export const App: React.FC = () => {
                     {/* Suggest a Tool Card (Matching Sleek Design) */}
                     <div
                       id="suggest-tool-card"
-                      onClick={() => {
-                        const title = prompt("What tool, mini game, or utility would you like to see next in Mini Pokie?");
-                        if (title && title.trim()) {
-                          alert(`Thank you for your suggestion: "${title.trim()}"! We're adding new modular utilities regularly.`);
-                        }
-                      }}
+                      onClick={() => setIsSuggestModalOpen(true)}
                       className="bg-slate-100/70 dark:bg-slate-900/50 p-5 rounded-2xl border border-dashed border-slate-300 dark:border-slate-800 flex flex-col items-center justify-center text-center group cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors min-h-[160px]"
                     >
                       <div className="w-10 h-10 border-2 border-slate-400 dark:border-slate-600 border-dashed rounded-full flex items-center justify-center text-slate-400 dark:text-slate-500 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 group-hover:border-indigo-500 transition-colors">
@@ -343,15 +342,24 @@ export const App: React.FC = () => {
                         Try searching for keywords like "QR", "Snake", "Quiz", or "Password".
                       </p>
                     </div>
-                    <button
-                      onClick={() => {
-                        setSearchQuery("");
-                        setActiveCategory("all");
-                      }}
-                      className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition shadow-xs"
-                    >
-                      View All Items
-                    </button>
+                    <div className="flex items-center justify-center gap-3">
+                      <button
+                        onClick={() => {
+                          setSearchQuery("");
+                          setActiveCategory("all");
+                        }}
+                        className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition shadow-xs"
+                      >
+                        View All Items
+                      </button>
+                      <button
+                        onClick={() => setIsSuggestModalOpen(true)}
+                        className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-xs font-bold transition shadow-xs flex items-center gap-1.5"
+                      >
+                        <Lightbulb className="w-3.5 h-3.5" />
+                        <span>Request this Tool</span>
+                      </button>
+                    </div>
                   </div>
                 )}
               </div>
@@ -370,6 +378,14 @@ export const App: React.FC = () => {
         onSelectApp={(appId) => {
           handleLaunchApp(appId);
         }}
+        onOpenSuggest={() => setIsSuggestModalOpen(true)}
+      />
+
+      {/* Suggest a Tool / Request New Mini App Modal */}
+      <SuggestToolModal
+        isOpen={isSuggestModalOpen}
+        onClose={() => setIsSuggestModalOpen(false)}
+        onSelectApp={(appId) => handleLaunchApp(appId)}
       />
     </div>
   );
