@@ -86,8 +86,13 @@
 | App Identifier | Title | Category | Technical Specifications & Key Features |
 | :--- | :--- | :--- | :--- |
 | `2048` | **2048 Puzzle Arcade** | `games` | 4x4 slide matrix, move history undo stack, Web Audio chime synthesis, high score persistence. |
+| `brick-breaker` | **Brick Breaker Retro Arcade** | `games` | 60 FPS classic breakout with multi-hit bricks, explosive bombs, lasers, fireball power-ups, and 3 level stages. |
+| `wordle` | **Wordle Guess Arcade** | `games` | 5-letter hidden word guessing in 6 tries, virtual keyboard, color status hints, dictionary validation, and streak tracker. |
 | `snake` | **Retro Snake Arcade** | `games` | 60 FPS HTML5 canvas, Golden Apple bonuses, speed scaling, touch D-Pad controls. |
-| `quiz` | **Quiz Master & Trivia Arena** | `games` | Multi-category trivia decks, AI dynamic quiz generator, streak multipliers, sound FX. |
+| `minesweeper` | **Minesweeper Pro** | `games` | Beginner (9x9), Intermediate (14x14), and Expert (16x20) grids. Safe first click, chording, audio chimes, best time tracker. |
+| `typing-sprint` | **Speed Typing Hero** | `games` | 30s/60s sprints, programming code snippets, mechanical key click sounds, live WPM, accuracy %, error tracking. |
+| `memory-match` | **Memory Card Match** | `games` | 3D card flipping across Arcade, Space, Wildlife, and Tech themes. Combo multipliers, accuracy scoring, and best records. |
+| `quiz` | **Quiz Master & Trivia Arena** | `games` | Multi-category trivia decks, dynamic AI quiz generator for any topic, streak multipliers, sound FX. |
 | `qrcode` | **QR Code Studio** | `tools` | Real-time vector generator, error correction toggles, foreground/background color picker, PNG/SVG exports. |
 | `markdown` | **Markdown Studio** | `tools` | Split-pane live editor, starter templates, word/char counters, HTML preview sanitized via `rehype-sanitize`. |
 | `palette` | **Palette Studio & Contrast Lab** | `tools` | Spacebar color harmony generator, hex locks, WCAG 2.1 AA/AAA compliance checker, CSS export. |

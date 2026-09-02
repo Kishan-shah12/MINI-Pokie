@@ -23,7 +23,12 @@ export const AppCard: React.FC<AppCardProps> = ({
       case "AI Powered":
         return "bg-purple-100 text-purple-700 dark:bg-purple-950/80 dark:text-purple-300";
       case "Hot":
-        return "bg-orange-100 text-orange-600 dark:bg-orange-950/80 dark:text-orange-300";
+      case "Arcade":
+        return "bg-rose-100 text-rose-600 dark:bg-rose-950/80 dark:text-rose-300";
+      case "Challenge":
+        return "bg-indigo-100 text-indigo-700 dark:bg-indigo-950/80 dark:text-indigo-300";
+      case "Fun":
+        return "bg-teal-100 text-teal-700 dark:bg-teal-950/80 dark:text-teal-300";
       case "Essential":
         return "bg-blue-100 text-blue-700 dark:bg-blue-950/80 dark:text-blue-300";
       default:

@@ -8,6 +8,11 @@ import { AIUtilitiesApp } from "./apps/AIUtilitiesApp";
 import { PaletteStudioApp } from "./apps/PaletteStudioApp";
 import { PasswordGeneratorApp } from "./apps/PasswordGeneratorApp";
 import { UnitConverterApp } from "./apps/UnitConverterApp";
+import { MinesweeperApp } from "./apps/MinesweeperApp";
+import { WordGuessApp } from "./apps/WordGuessApp";
+import { MemoryMatchApp } from "./apps/MemoryMatchApp";
+import { TypingSprintApp } from "./apps/TypingSprintApp";
+import { BrickBreakerApp } from "./apps/BrickBreakerApp";
 
 export const APPS_REGISTRY: PokieApp[] = [
   {
@@ -31,14 +36,24 @@ export const APPS_REGISTRY: PokieApp[] = [
     component: Game2048App,
   },
   {
-    id: "markdown",
-    title: "Markdown Studio",
-    description: "Real-time split-screen markdown editor with live HTML preview, syntax highlighting, templates, and word count stats.",
-    category: "tools",
-    icon: "FileEdit",
-    tags: ["Writing", "Markdown", "Export", "Preview"],
-    badge: "Essential",
-    component: MarkdownEditorApp,
+    id: "brick-breaker",
+    title: "Brick Breaker Retro Arcade",
+    description: "60 FPS classic breakout with multi-hit bricks, explosive bombs, laser cannons, fireball power-ups, and 3 level stages.",
+    category: "games",
+    icon: "Flame",
+    tags: ["Arcade", "Action", "Power-ups", "Retro 60fps"],
+    badge: "Arcade",
+    component: BrickBreakerApp,
+  },
+  {
+    id: "wordle",
+    title: "Wordle Guess Arcade",
+    description: "Guess the hidden 5-letter word in 6 tries. Featuring on-screen keyboard, flip color hints, dictionary validation, and streak tracking.",
+    category: "games",
+    icon: "Sparkles",
+    tags: ["Word Game", "Brain", "Daily", "Puzzles"],
+    badge: "Popular",
+    component: WordGuessApp,
   },
   {
     id: "snake",
@@ -51,6 +66,36 @@ export const APPS_REGISTRY: PokieApp[] = [
     component: SnakeGameApp,
   },
   {
+    id: "minesweeper",
+    title: "Minesweeper Pro",
+    description: "Classic logic puzzle with Beginner, Intermediate, and Expert grids. Safe first click, quick chording, sound chimes, and timer records.",
+    category: "games",
+    icon: "Bomb",
+    tags: ["Logic", "Classic", "Strategy", "Retro"],
+    badge: "Classic",
+    component: MinesweeperApp,
+  },
+  {
+    id: "typing-sprint",
+    title: "Speed Typing Hero",
+    description: "Fast-paced typing test with 30s/60s sprints, real-world code snippets, mechanical keyboard click sounds, live WPM, and accuracy rating.",
+    category: "games",
+    icon: "Keyboard",
+    tags: ["Typing", "Speed Test", "Code Snippets", "Skills"],
+    badge: "Challenge",
+    component: TypingSprintApp,
+  },
+  {
+    id: "memory-match",
+    title: "Memory Card Match & Speed Flip",
+    description: "Test and train your visual memory. Flip 3D cards across Arcade, Space, Wildlife, and Tech themes with combo multipliers.",
+    category: "games",
+    icon: "Layers",
+    tags: ["Memory", "Cards", "Visual", "Brain Training"],
+    badge: "Fun",
+    component: MemoryMatchApp,
+  },
+  {
     id: "quiz",
     title: "Quiz Master & Trivia Arena",
     description: "Challenge your mind with standard trivia decks or generate infinite custom quizzes on any topic using Gemini AI!",
@@ -59,6 +104,16 @@ export const APPS_REGISTRY: PokieApp[] = [
     tags: ["Trivia", "AI Generated", "Timer", "Education"],
     badge: "AI Powered",
     component: QuizMasterApp,
+  },
+  {
+    id: "markdown",
+    title: "Markdown Studio",
+    description: "Real-time split-screen markdown editor with live HTML preview, syntax highlighting, templates, and word count stats.",
+    category: "tools",
+    icon: "FileEdit",
+    tags: ["Writing", "Markdown", "Export", "Preview"],
+    badge: "Essential",
+    component: MarkdownEditorApp,
   },
   {
     id: "ai-tools",
