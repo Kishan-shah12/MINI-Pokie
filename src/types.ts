@@ -13,7 +13,31 @@ export interface PokieApp {
   icon?: string;
   iconName?: string;
   tags: string[];
-  badge?: "Popular" | "New" | "AI-Powered" | "Classic" | "Featured" | "Offline" | "Essential" | "Hot" | "Secure" | "AI Powered" | "Arcade" | "Challenge" | "Fun" | "Physics" | "3D Runner" | "Dev Tools" | "Audio" | "Crypto" | "Logic";
+  badge?:
+    | "Popular"
+    | "New"
+    | "AI-Powered"
+    | "Classic"
+    | "Featured"
+    | "Offline"
+    | "Essential"
+    | "Hot"
+    | "Secure"
+    | "AI Powered"
+    | "Arcade"
+    | "Challenge"
+    | "Fun"
+    | "Physics"
+    | "3D Runner"
+    | "Dev Tools"
+    | "Audio"
+    | "Crypto"
+    | "Logic"
+    | "Strategy"
+    | "Audio/Video"
+    | "Design"
+    | "Utility"
+    | string;
   featured?: boolean;
   accentColor?: string;
   component: ComponentType<any>;

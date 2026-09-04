@@ -205,6 +205,90 @@ Deep Reasoning Fallback: gemini-3.7-flash
   }
   ```
 
+---
+
+## 🚀 Deployment: Google Cloud Run (Containerized)
+
+Follow this production guide to configure, secure, and deploy Mini Pokie to Google Cloud Run with Secret Manager and challenge verification.
+
+### 1. Prerequisites & Environment Setup
+
+```bash
+# Set your active GCP project
+export PROJECT_ID="your-google-cloud-project-id"
+export REGION="us-central1"
+export SERVICE_NAME="mini-pokie"
+
+gcloud config set project $PROJECT_ID
+
+# Enable required Google Cloud APIs
+gcloud services enable \
+  run.googleapis.com \
+  secretmanager.googleapis.com \
+  firestore.googleapis.com \
+  cloudbuild.googleapis.com \
+  artifactregistry.googleapis.com
+```
+
+### 2. Secret Manager Configuration & IAM Access
+
+Securely store your `GEMINI_API_KEY` in Google Cloud Secret Manager:
+
+```bash
+# Create and populate the secret
+gcloud secrets create GEMINI_API_KEY --replication-policy="automatic"
+echo -n "YOUR_GEMINI_API_KEY_HERE" | gcloud secrets versions add GEMINI_API_KEY --data-file=-
+
+# Retrieve your project number
+PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
+
+# Grant the default Cloud Run service account access to read the secret
+gcloud secrets add-iam-policy-binding GEMINI_API_KEY \
+  --member="serviceAccount:${PROJECT_NUMBER}-compute@developer.gserviceaccount.com" \
+  --role="roles/secretmanager.secretAccessor"
+```
+
+### 3. Cloud Firestore Security Rules
+
+Deploy secure owner-isolated rules for Firestore:
+
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId}/interactions/{interactionId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+```
+
+### 4. Deploy to Google Cloud Run
+
+Deploy directly from source with the mounted Secret Manager secret:
+
+```bash
+gcloud run deploy $SERVICE_NAME \
+  --source . \
+  --region=$REGION \
+  --platform=managed \
+  --allow-unauthenticated \
+  --port=3000 \
+  --set-secrets=GEMINI_API_KEY=GEMINI_API_KEY:latest
+```
+
+### 5. Required Campaign Labeling & Verification Binding
+
+Apply the mandatory verification label to register your Cloud Run service:
+
+```bash
+gcloud run services update $SERVICE_NAME \
+  --update-labels=dev-tutorial=cloud-run-ai-challenge \
+  --region=$REGION
+```
+
+---
+
 ## 💻 Local Development Guide
 
 ```bash
@@ -245,3 +329,4 @@ Mini Pokie is architected for frictionless modularity. To add a new mini app:
    }
    ```
 3. The catalog, search engine, sidebar, and URL deep linking automatically incorporate your new module!
+

@@ -275,6 +275,51 @@ Output strictly valid JSON adhering to this structure:
   }
 });
 
+// AI Interactive Assistant Chat & Playground
+app.post("/api/ai/chat", async (req: Request, res: Response) => {
+  try {
+    const data = req.body && typeof req.body === "object" ? req.body : {};
+    const message = typeof data.message === "string" ? data.message.trim() : "";
+    const history = Array.isArray(data.history) ? data.history : [];
+    const persona = typeof data.persona === "string" ? data.persona : "general";
+
+    if (!message) {
+      return res.status(400).json({ error: "Message is required." });
+    }
+
+    const personaPrompts: Record<string, string> = {
+      general: "You are an intelligent, helpful, friendly and precise AI Assistant on Mini Pokie. Provide structured, clean, and engaging markdown responses.",
+      coder: "You are an expert senior software engineer and architect. Provide clean, well-commented code snippets, architecture breakdowns, bug analysis, and performance recommendations.",
+      copywriter: "You are a master creative copywriter and editor. Craft compelling, persuasive, and crisp copy tailored to the user's objective.",
+      tutor: "You are an encouraging, world-class educator. Explain complex topics using intuitive analogies, step-by-step reasoning, and verification questions.",
+      brainstormer: "You are a high-energy creative ideator. Generate innovative, diverse, out-of-the-box ideas, categorized with pros and cons.",
+    };
+
+    const systemInstruction = personaPrompts[persona] || personaPrompts.general;
+
+    // Build context prompt
+    let conversationText = "";
+    if (history.length > 0) {
+      conversationText += "Conversation History:\n";
+      for (const h of history.slice(-6)) {
+        if (h && typeof h.content === "string") {
+          conversationText += `${h.role === "user" ? "User" : "Assistant"}: ${h.content}\n`;
+        }
+      }
+      conversationText += "\n";
+    }
+    conversationText += `User: ${message}\nAssistant:`;
+
+    const result = await generateContentWithFallback(conversationText, systemInstruction);
+    return res.json({ reply: result.text, modelUsed: result.modelUsed });
+  } catch (error: any) {
+    console.error("Error in /api/ai/chat:", error);
+    return res.status(500).json({
+      error: error?.message || "Failed to process chat with AI.",
+    });
+  }
+});
+
 // AI App Idea & Feature Spec Enhancer
 app.post("/api/ai/suggest-spec", async (req: Request, res: Response) => {
   try {
