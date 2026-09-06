@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       repo_b_url:
-        description: 'HTTPS URL of Repo B (e.g. https://github.com/owner/repo-b.git)'
+        description: 'https://github.com/Kishan-shah12/MINI-poke.git'
         required: true
       repo_b_branch:
         description: 'Branch of Repo B to merge'
@@ -35,14 +35,14 @@ jobs:
       - name: Fetch and Merge Repo B into Subfolder
         run: |
           # 1. Add Repo B as a remote and fetch its history
-          git remote add incoming "${{ https://github.com/Kishan-shah12/MINI-poke.git }}"
+          git remote add incoming "${{ inputs.repo_b_url }}"
           git fetch incoming "${{ inputs.repo_b_branch }}"
 
           # 2. Merge Repo B using subtree strategy to isolate into a folder
           git merge -s subtree \
             -Xsubtree="${{ inputs.subfolder_name }}" \
             --allow-unrelated-histories \
-            -m "Merge ${{ https://github.com/Kishan-shah12/MINI-poke.git }} into ${{ inputs.subfolder_name }}" \
+            -m "Merge ${{ inputs.repo_b_url }} into ${{ inputs.subfolder_name }}" \
             "incoming/${{ inputs.repo_b_branch }}"
 
           # 3. Push the combined history back to Repo A
